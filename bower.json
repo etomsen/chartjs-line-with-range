@@ -1,0 +1,15 @@
+{
+  "name": "ChartJSLineWithRange",
+  "version": "0.0.0",
+  "authors": [
+    "Evgeny Tomsen <eugene.tomsen@gmail.com>"
+  ],
+  "description": "ChartJS Line with highlited Y Range component",
+  "main": "Chart.LineWithRange.js",
+  "keywords": [
+    "ChartJS"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/etomsen/chartjs-line-with-range",
+  "dependencies": {"Chart.js": "~1.0.2"}
+}
