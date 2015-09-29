@@ -14,8 +14,7 @@
     "dependencies": {"Chart.js": "~1.0.2"},
     "overrides": {
         "Chart.js": {
-        "main": [
-            "Chart.js/Chart.js"
-        ]
+            "main": ["Chart.js/Chart.js"]
+        }
     }
-  }
+}
