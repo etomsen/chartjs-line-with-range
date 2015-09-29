@@ -49,6 +49,9 @@
 		//Boolean - Whether to fill the dataset with a colour
 		datasetFill : true,
 
+		yRangeHighlight: null,
+		yRangeHighlightColor: "blue",
+
 		//String - A legend template
 		legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
@@ -253,9 +256,10 @@
 			this.scale.update(newScaleProps);
 		},
 		draw : function(ease){
-			debugger;
 			var easingDecimal = ease || 1;
 			this.clear();
+
+			console.log(this.options.yRangeHighlight);
 
 			var ctx = this.chart.ctx;
 
@@ -320,7 +324,22 @@
 						}
 					},this);
 				}
-
+				// begin: draw the range
+				if (this.options.yRangeHighlight && this.options.yRangeHighlight.length === 2) {
+					var y1 = this.scale.calculateY(this.options.yRangeHighlight[0]);
+					var y2 = this.scale.calculateY(this.options.yRangeHighlight[1]);
+					ctx.lineWidth = this.options.datasetStrokeWidth;
+					ctx.strokeStyle = dataset.strokeColor;
+					ctx.beginPath();
+					ctx.moveTo(pointsWithValues[0].x, y2);
+					ctx.lineTo(pointsWithValues[pointsWithValues.length - 1].x, y2);
+					ctx.lineTo(pointsWithValues[pointsWithValues.length - 1].x, y1);
+					ctx.lineTo(pointsWithValues[0].x, y1);
+					ctx.fillStyle = this.options.yRangeHighlightColor;
+					ctx.closePath();
+					ctx.fill();
+				}
+				// end: draw the range
 
 				//Draw the line between all the points
 				ctx.lineWidth = this.options.datasetStrokeWidth;
